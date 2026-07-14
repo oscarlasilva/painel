@@ -1,0 +1,27 @@
+PAINEL MODULAR DAS FILAS DE ESPERA DE PSICOLOGIA
+
+ESTRUTURA
+- index.html
+- style.css
+- dashboard.js
+- dados/fila.csv
+
+COMO ATUALIZAR
+1. Gere um novo CSV mantendo exatamente os mesmos nomes das colunas.
+2. Substitua o arquivo dados/fila.csv.
+3. Não altere o nome do arquivo.
+4. Atualize a página no navegador.
+
+IMPORTANTE
+Como o HTML carrega o CSV separadamente, ele deve ser aberto em um servidor web.
+A forma mais simples é hospedar toda a pasta no GitHub Pages, Netlify ou Cloudflare Pages.
+
+TESTE LOCAL
+Com Python instalado, abra um terminal dentro da pasta e execute:
+python -m http.server 8000
+
+Depois acesse:
+http://localhost:8000
+
+NOTION
+Após hospedar, copie a URL pública e use o bloco /embed no Notion.
