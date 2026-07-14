@@ -83,8 +83,8 @@ function makeKpis(rows, byPeriod, periods) {
   const latestESP=byPeriod[latest]?.Especializada;
   const prevAPS=byPeriod[previous]?.APS;
   const prevESP=byPeriod[previous]?.Especializada;
-  const total=(latestAPS?queueValue(latestAPS):0)+(latestESP?queueValue(latestESP):0);
-  const firstTotal=(byPeriod[first]?.APS?queueValue(byPeriod[first].APS):0)+(byPeriod[first]?.Especializada?queueValue(byPeriod[first].Especializada):0);
+  const total=(latestAPS?.fila_anterior??0)+(latestESP?.fila_anterior??0);
+  const firstTotal=(byPeriod[first]?.APS?.fila_anterior??0)+(byPeriod[first]?.Especializada?.fila_anterior??0);
   const diff=total-firstTotal;
 
   const completePeriods=periods.filter(p => byPeriod[p]?.APS?.media_espera != null || byPeriod[p]?.Especializada?.media_espera != null);
@@ -102,8 +102,8 @@ function makeKpis(rows, byPeriod, periods) {
 
   const cards=[
     {label:"Fila total atual",value:fmtInt(total),sub:"APS + Especializada",delta:(diff<0?"↓ ":"↑ ")+fmtInt(Math.abs(diff))+" desde "+monthLabel(first),cls:diff<0?"good":"bad"},
-    {label:"Fila APS",value:fmtInt(queueValue(latestAPS)),sub:monthLabel(latest),delta:pct(queueValue(latestAPS)/total*100)+" da fila",cls:"neutral"},
-    {label:"Fila Especializada",value:fmtInt(queueValue(latestESP)),sub:monthLabel(latest),delta:pct(queueValue(latestESP)/total*100)+" da fila",cls:"neutral"},
+    {label:"Fila APS",value:fmtInt(latestAPS?.fila_anterior),sub:monthLabel(latest),delta:pct((latestAPS?.fila_anterior??0)/total*100)+" da fila",cls:"neutral"},
+    {label:"Fila Especializada",value:fmtInt(latestESP?.fila_anterior),sub:monthLabel(latest),delta:pct((latestESP?.fila_anterior??0)/total*100)+" da fila",cls:"neutral"},
     {label:"Tempo médio APS",value:fmtDec(lcAPS?.media_espera)+" dias",sub:"último consolidado: "+monthLabel(lastComplete),delta:"",cls:"neutral"},
     {label:"Tempo médio Especializada",value:fmtDec(lcESP?.media_espera)+" dias",sub:"último consolidado: "+monthLabel(lastComplete),delta:"",cls:"neutral"},
     {label:"Maior espera",value:fmtInt(maxWait)+" dias",sub:"último consolidado: "+monthLabel(lastComplete),delta:"",cls:"neutral"}
@@ -117,12 +117,12 @@ function makeKpis(rows, byPeriod, periods) {
       ${c.delta?`<span class="delta ${c.cls}">${c.delta}</span>`:""}
     </article>`).join("");
 
-  const apsShare=total ? queueValue(latestAPS)/total*100 : 0;
+  const apsShare=total ? (latestAPS?.fila_anterior??0)/total*100 : 0;
   document.getElementById("donut").style.background=`conic-gradient(var(--aps) 0 ${apsShare}%,var(--esp) ${apsShare}% 100%)`;
   document.getElementById("donutTotal").textContent=fmtInt(total);
   document.getElementById("donutLegend").innerHTML=`
-    <span><i class="swatch aps"></i>APS: ${fmtInt(queueValue(latestAPS))} (${pct(apsShare)})</span>
-    <span><i class="swatch esp"></i>Especializada: ${fmtInt(queueValue(latestESP))} (${pct(100-apsShare)})</span>`;
+    <span><i class="swatch aps"></i>APS: ${fmtInt(latestAPS?.fila_anterior)} (${pct(apsShare)})</span>
+    <span><i class="swatch esp"></i>Especializada: ${fmtInt(latestESP?.fila_anterior)} (${pct(100-apsShare)})</span>`;
 }
 
 const tooltip=document.getElementById("tooltip");
