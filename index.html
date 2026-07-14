@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel das Filas de Espera de Psicologia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <header class="header">
+      <div>
+        <h1>Painel das Filas de Espera de Psicologia</h1>
+        <p>Rede Municipal de Saúde de Balneário Piçarras</p>
+      </div>
+      <div class="badge" id="updateBadge">Carregando dados...</div>
+    </header>
+
+    <div class="notice" id="notice"></div>
+
+    <section class="kpis" id="kpis"></section>
+
+    <main class="grid">
+      <section class="card panel span-8">
+        <div class="panel-head">
+          <div>
+            <h2>Evolução da fila</h2>
+            <p>Quantidade de usuários por competência e serviço.</p>
+          </div>
+          <div class="legend">
+            <span><i class="swatch aps"></i>APS</span>
+            <span><i class="swatch esp"></i>Especializada</span>
+          </div>
+        </div>
+        <div class="chart" id="queueChart"></div>
+      </section>
+
+      <section class="card panel span-4">
+        <div class="panel-head">
+          <div>
+            <h2>Composição atual</h2>
+            <p>Distribuição da fila mais recente.</p>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut" id="donut"></div>
+          <div class="donut-center">
+            <strong id="donutTotal">—</strong>
+            <span>usuários</span>
+          </div>
+        </div>
+        <div class="legend centered" id="donutLegend"></div>
+      </section>
+
+      <section class="card panel span-6">
+        <div class="panel-head">
+          <div>
+            <h2>Entradas e saídas</h2>
+            <p>Movimentação nas competências completas.</p>
+          </div>
+        </div>
+        <div class="chart" id="movementChart"></div>
+      </section>
+
+      <section class="card panel span-6">
+        <div class="panel-head">
+          <div>
+            <h2>Tempo médio de espera</h2>
+            <p>Comparação em dias por serviço.</p>
+          </div>
+        </div>
+        <div class="chart" id="waitChart"></div>
+      </section>
+
+      <section class="card panel span-6">
+        <div class="panel-head">
+          <div>
+            <h2>Tempo máximo de espera</h2>
+            <p>Maior espera observada em cada competência.</p>
+          </div>
+        </div>
+        <div class="chart" id="maxWaitChart"></div>
+      </section>
+
+      <section class="card panel span-6">
+        <div class="panel-head">
+          <div>
+            <h2>Indicadores de desempenho</h2>
+            <p>Taxa de resolução e saldo mensal.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="performanceTable"></table>
+        </div>
+      </section>
+
+      <section class="card panel span-12">
+        <div class="panel-head">
+          <div>
+            <h2>Base consolidada</h2>
+            <p>Dados carregados diretamente do arquivo CSV.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="dataTable"></table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Fonte: Sistema de informação da Rede Municipal de Saúde · Elaboração: Núcleo de Psicologia
+    </footer>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
