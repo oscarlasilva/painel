@@ -1,6 +1,8 @@
 Período,Tipo,Data base,Fila anterior,Entrada,Permanecem,Saída,Fila final,Dias úteis,Média de Espera (dias),Máxima Espera (dias)
-08-2026,Especializada,09/08/2026,157,,,,,,,
-08-2026,APS,09/08/2026,194,,,,,,,
+09-2026,Especializada,09/09/2026,145,,,,,,,
+09-2026,APS,09/09/2026,207,,,,,,,
+08-2026,Especializada,09/08/2026,157,85,97,97,145,22,"67,3",156
+08-2026,APS,09/08/2026,194,55,154,42,207,22,91,351
 07-2026,Especializada,07/07/2026,217,91,95,151,157,23,"57,7",139
 07-2026,APS,07/07/2026,191,67,144,64,194,23,"84,4",320
 06-2026,Especializada,08/06/2026,257,61,172,101,217,21,"121,2",412
